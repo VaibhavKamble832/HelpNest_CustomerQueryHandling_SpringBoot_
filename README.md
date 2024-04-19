@@ -11,7 +11,9 @@
 <P><b>5) Query Status Management: </b>Allows Employees to update the status of each query to keep track of processing stages.</P>
 
 <h2>Technologies Used: </h2>
-<P><b>Backend: </b>Java, SpringBoot.</P>
-<P><b>Security</b> Spring Security for authentication and authorization</P>
-<P><b>Database</b> MySQL for data storage</P>
-<P><b>Frontend: </b> Thymeleaf for server-side rendering, complemented by HTML/CSS for styling</P>
+<P>-<b>Backend: </b>Java, SpringBoot.</P>
+<P>-<b>Security</b> Spring Security for authentication and authorization</P>
+<P>-<b>Database</b> MySQL for data storage</P>
+<P>-<b>Frontend: </b> Thymeleaf for server-side rendering, complemented by HTML/CSS for styling</P>
+
+<h2>Usage:</h2>
