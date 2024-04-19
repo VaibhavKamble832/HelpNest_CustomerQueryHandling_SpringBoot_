@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+
+	<section>
+		
+		<style>
+        
+		.hero {
+			background-color: #11235A;
+			padding: 100px 0;
+			border-radius: 0 0 10rem 10rem;
+		}
+			
+	#container {
+      width: 70%;
+      margin: -120px auto 50px auto;
+      padding: 30px;
+      border-radius: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #11235A;
+      font-weight: bold;
+      font-size: 45px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    /* th {
+      background-color: #11235A;
+      color: white;
+    } */
+
+   
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* tr:hover {
+      background-color: #ddd;
+    }
+
+    td:hover {
+      background-color: #f5f5f5;
+    } */
+			
+    </style>
+
+	
+	<div class="hero"></div>
+	
+	<div id="container">
+			<h1>Your Query Status</h1>
+
+			<th:block th:if="${session.msg}">
+   				 <p class="text-center alert alert-success text-success position-absolute" style=" width: 25rem; top: 80px; right: 20px; font-size: 22px;" th:text="${session.msg}"></p>
+    			 <th:block th:text="${@customerService.removeSessionMsg()}"></th:block>
+			</th:block>
+			<th:block th:if="${session.emsg}">
+   				 <p class="text-center alert alert-danger text-danger position-absolute" style=" width: 25rem; top: 80px; right: 20px; font-size: 22px;" th:text="${session.emsg}"></p>
+    			 <th:block th:text="${@customerService.removeSessionEMsg()}"></th:block>
+			</th:block>			
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Query</th>
+						<th scope="col">Date-Time</th>
+						<th scope="col">Status</th>
+						<th scope="col">Read</th>
+						<th scope="col">Dump</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="q:${queryList}">
+						<th scope="row" th:text="${q.id}"></th>
+						<td th:text="${q.addquery}"></td>
+						<td th:text="${q.createdAt}"></td>
+						<td th:text="${q.status}"></td>
+						<td th:if="${q.status=='sent' || q.status!='read'}" ><a th:href="@{/employee/readQuery/{q_id}(q_id=${q.id})}" class="btn btn-success">Read</a></td>
+						<td th:if="${q.status!='sent' && q.status=='read'}" ><a class="text-success">Readed</a></td>
+						<td th:if="${q.status=='sent' || q.status!='dump'}"><a th:href="@{/employee/dumpQuery/{q_id}(q_id=${q.id})}" class="btn btn-danger">Dump</a></td>
+						<td th:if="${q.status!='sent' && q.status=='dump'}" ><a class="text-success">Dumped</a></td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+			
+
+	</section>
+
+</body>
+</html>

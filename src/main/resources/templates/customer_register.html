@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+
+	<section>
+		
+		<style>
+        
+		.hero {
+			background-color: #11235A;
+			padding: 100px 0;
+			border-radius: 0 0 10rem 10rem;
+		}	
+			
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px 30px 30px;
+            margin: -150px auto 50px auto;
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-container:hover{
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-title {
+            color: #11235A;
+            font-weight:bold;
+            text-align: center;
+			font-size: 45px;
+			margin-bottom: -10px;
+        }
+
+        .form-button {
+            background-color: #11235A;
+            font-size:25px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background-color: #0a1f44;
+        }
+
+        label {
+            color: #11235A;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+	
+	<div class="hero">
+	
+	</div>
+	
+			<th:block th:if="${session.msg}">
+   				 <p class="text-center alert alert-success text-success position-absolute" style=" width: 25rem; top: 80px; right: 20px; font-size: 22px;" th:text="${session.msg}"></p>
+    			 <th:block th:text="${@customerService.removeSessionMsg()}"></th:block>
+			</th:block>
+			<th:block th:if="${session.emsg}">
+   				 <p class="text-center alert alert-danger text-danger position-absolute" style=" width: 25rem; top: 80px; right: 20px; font-size: 22px;" th:text="${session.emsg}"></p>
+    			 <th:block th:text="${@customerService.removeSessionEMsg()}"></th:block>
+			</th:block>
+			
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">Customer Registration</h2>
+            <hr>
+            <form th:action="@{/customerRegister}" th:object="${customer}" method="post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+						style="color: red; font-style: italic;"></span> 
+                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact:</label>
+					<span th:if="${#fields.hasErrors('contact')}"
+						th:errors="*{contact}" style="color: red; font-style: italic;"></span>
+                    <input type="text" class="form-control" id="contact" th:field="*{contact}" placeholder="Enter your contact">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+						style="color: red; font-style: italic;"></span>
+                    <select class="form-control" id="gender" th:field="*{gender}" >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+						style="color: red; font-style: italic;"></span>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+						style="color: red; font-style: italic;"></span>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter your password">
+                </div>
+                
+                <input type="hidden" name="role" value="ROLE_CUSTOMER">
+                
+                <button type="submit" class="form-button btn-block">Submit</button>
+                
+                <div class="mt-2" style="margin-left: 10rem">
+					<p>
+						Already have an account? <a href="/login" style="font-size: 20px;">Login</a>
+					</p>
+				</div>
+				
+            </form>
+        </div>
+    </div>
+
+	<!-- <div th:insert="index.html::footer">
+	
+	</div> -->
+	
+	</section>
+
+</body>
+</html>

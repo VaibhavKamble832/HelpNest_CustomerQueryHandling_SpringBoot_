@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+
+	<section>
+		
+<style>
+        
+	.hero {
+	   background-color: #11235A;
+	   padding: 100px 0;
+	   border-radius: 0 0 10rem 10rem;
+	 }
+			
+	#container {
+      width: 70%;
+      margin: -120px auto 50px auto;
+      padding: 30px;
+      border-radius: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #11235A;
+      font-weight: bold;
+      font-size: 45px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+   
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+</style>
+
+	<div class="hero"></div>
+	
+	<div id="container">
+			<h1>Customers Details</h1>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Contact</th>
+						<th scope="col">gender</th>
+						<th scope="col">Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c:${customerlist}">
+						<th scope="row" th:text="${c.id}"></th>
+						<td th:text="${c.name}"></td>
+						<td th:text="${c.contact}"></td>
+						<td th:text="${c.gender}"></td>
+						<td th:text="${c.email}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+	</div>
+			
+
+	</section>
+
+</body>
+</html>

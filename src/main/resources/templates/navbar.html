@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="layout(content)">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+
+<style>
+
+html, body {
+	width: 100%;
+	font-family: "Nunito", sans-serif;
+	overflow-y: scroll; /* Allows vertical scrolling */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer 10+ */
+}
+body::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and newer versions of Opera */
+}
+
+.navbar {
+	background-color: white;
+	border-radius: 50px;
+	box-shadow: 0 0 0 50px #11235A;
+}
+
+
+
+.navbar-brand {
+	color: #11235A !important;
+	font-size: 30px;
+	font-weight: bold;
+}
+.navbar-nav{
+	margin-left: 400px;
+}
+
+.navbar-nav .nav-link {
+	color: #11235A;
+	font-size: 20px;
+}
+.navbar-nav .nav-link:hover{
+	border-bottom: 2px solid #11235A; 
+}
+
+.adminbtn{
+	margin-left:10px;
+	background-color:white;  
+	width:100px;
+	color: #11235A; 
+	text-align: center; 
+	width:135px;
+	font-weight: bold; 
+	border-radius:30px; 
+	border: 3px solid #11235A; 
+	padding: 6px 20px;
+	transition: 0.3s;
+}
+.adminbtn:hover{
+	background-color: #11235A;
+	 color: white;
+}
+
+
+</style>
+
+</head>
+<body>
+
+	
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg my-navbar">
+		<a class="navbar-brand ml-5" href="/">HelpNest</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/#services">Services</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/#about-us">About Us</a>
+				</li>
+		
+				<th:block th:if="${mycustomer!=null && myadmin==null}">
+					<p th:text="${customer}"></p>
+					<li class="nav-item"><a class="nav-link" href="/customer/home">Your Panel</a>
+					<li class="nav-item"><a class="nav-link fw-bold hover-effect" style="margin-left:330px; background-color:#11235A; width:100px; text-align: center; width:135px; border-radius:30px;" href="/logout"><span class="text-light">Logout</span></a></li>
+				</th:block>	
+							
+				<th:block th:if="${myadmin!=null}">
+					<li class="nav-item"><a class="nav-link" href="/admin/home">Your Panel</a>
+					<li class="nav-item"><a class="nav-link fw-bold hover-effect" style="margin-left:330px; background-color:#11235A; width:100px; text-align: center; width:135px; border-radius:30px;" href="/logout"><span class="text-light">Logout</span></a></li>
+				</th:block>				
+		
+				<th:block th:if="${myemployee!=null}">
+					<li class="nav-item"><a class="nav-link" href="/employee/home">Your Panel</a>
+					<li class="nav-item"><a class="nav-link fw-bold hover-effect" style="margin-left:330px; background-color:#11235A; width:100px; text-align: center; width:135px; border-radius:30px;" href="/logout"><span class="text-light">Logout</span></a></li>
+				</th:block>				
+		
+		
+				<th:block th:if="${mycustomer==null && myadmin==null && myemployee==null}">
+					<li class="nav-item"><a class="nav-link fw-bold hover-effect" style="margin-left:200px; background-color:#11235A; width:100px; text-align: center; width:135px; border-radius:30px;" href="/customerRegister"><span class="text-light">Register</span></a></li>
+					<li class="nav-item "><a class="nav-link fw-bold hover-effect" style=" margin-left:10px;background-color:#11235A; width:100px; text-align: center; width:135px; border-radius:30px;" href="/login"><span class="text-light">Login</span></a></li>
+					<li class="nav-item" ><a href="/adminRegister" class="nav-link btn adminbtn">Admin</a></li>
+				</th:block>
+			</ul>
+		</div>
+	</nav>
+	
+	
+	<div th:replace="${content}"></div>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<script src="https://kit.fontawesome.com/bb9e5842e1.js" crossorigin="anonymous"></script>
+	
+
+</body>
+</html>

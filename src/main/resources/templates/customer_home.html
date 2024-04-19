@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+
+		<style>
+html body {
+	height: 100vh;
+}
+
+.hero {
+	background-color: #11235A;
+	padding: 70px 0;
+	border-radius: 0 0 10rem 10rem;
+}
+
+.hero h1 {
+	color: white;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.listQ-btn {
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	border-radius: 4px;
+	background-color: #11235A;
+	border: none;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	font-size: 32px;
+	padding: 40px;
+	width: 400px;
+	transition: all 0.5s;
+	border-radius: 20px;
+	cursor: pointer;
+	margin: 36px;
+	box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .7);
+}
+
+.buttons .listQ-btn {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.listQ-btn:after {
+	content: '->';
+	position: absolute;
+	opacity: 0;
+	top: 40px;
+	right: -20px;
+	transition: 0.5s;
+}
+
+.listQ-btn:hover {
+	padding-right: 24px;
+	padding-left: 5px;
+	color: white;
+	text-decoration: none;
+}
+
+.listQ-btn:hover:after {
+	opacity: 1;
+	right: 20px;
+}
+
+.buttons .addQ-btn {
+	position: absolute;
+	top: 150px;
+	left: 250px;
+	border-radius: 4px;
+	background-color: #11235A;
+	border: none;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	font-size: 32px;
+	padding: 40px;
+	width: 400px;
+	transition: all 0.5s;
+	border-radius: 20px;
+	cursor: pointer;
+	margin: 36px;
+	box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .7);
+}
+
+.buttons .addQ-btn {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.addQ-btn:after {
+	content: '->';
+	position: absolute;
+	opacity: 0;
+	top: 40px;
+	right: -20px;
+	transition: 0.5s;
+}
+
+.addQ-btn:hover {
+	padding-right: 24px;
+	padding-left: 8px;
+}
+
+.addQ-btn:hover:after {
+	opacity: 1;
+	right: 10px;
+}
+
+/* .dropkaro{
+	position: absolute;
+	top: -50px;
+	right: 100px;
+	background-color: red;
+} */
+
+.dropdown-menu {
+	z-index: 1;
+	display: none;
+	position: absolute;
+}
+
+.dropdown:hover .dropdown-menu {
+	display: block;
+}
+
+.dropdown-toggle {
+	background-color: transparent;
+	border: none;
+	color: white;
+	padding: 0;
+	font-size: 1.25rem;
+}
+
+.dropdown-menu {
+	margin: 0;
+	border: none;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+	color: #333;
+	padding: 0.5rem 1.5rem;
+	font-size: 1rem;
+}
+
+.dropdown-item:hover {
+	background-color: #f5f5f5;
+}
+
+.dropdown-divider {
+	border-top: 1px solid #e5e5e5;
+}
+</style>
+
+		<div class="hero">
+			<h1 class="text-center">Welcome Customer</h1>
+
+				<div class="dropdown" style="display: inline;left: 75rem; top: -7rem;">
+					<button class="btn dropdown-toggle" type="button"
+						id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<i class="fa-solid fa-circle-user text-white" style="font-size:25px;"></i> <span
+						 th:text="${mycustomer.name}" class="d-none d-sm-inline mx-1 text-white" style="font-size: 25px"></span>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right"
+						style="background-color: white;">
+						<a class="dropdown-item" href="/customer/changePass">Change Password</a> <a
+							class="dropdown-item" href="/customer/editProfile">Edit Profile</a>
+					</div>
+				</div>
+		</div>
+
+
+		<div class="buttons">
+			<h1>
+				<a href="/customer/addQuery" class="addQ-btn">Ask Your Query</a> 
+				<a th:href="@{/customer/queryList/{customer_id}(customer_id=${mycustomer.id})}" class="listQ-btn">Your Query Status</a>
+			</h1>
+		</div>
+
+	</section>
+
+
+</body>
+</html>

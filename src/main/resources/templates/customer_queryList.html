@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+
+	<section>
+		
+		<style>
+        
+		.hero {
+			background-color: #11235A;
+			padding: 100px 0;
+			border-radius: 0 0 10rem 10rem;
+		}
+			
+	#container {
+      width: 70%;
+      margin: -120px auto 50px auto;
+      padding: 30px;
+      border-radius: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #11235A;
+      font-weight: bold;
+      font-size: 45px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    /* th {
+      background-color: #11235A;
+      color: white;
+    } */
+	.status{
+		font-weight: bold;
+	}
+   
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* tr:hover {
+      background-color: #ddd;
+    }
+
+    td:hover {
+      background-color: #f5f5f5;
+    } */
+			
+    </style>
+
+	
+	<div class="hero"></div>
+	
+	<div id="container">
+			<h1>Your Query Status</h1>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Query</th>
+						<th scope="col">Date-Time</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="q:${queryList}">
+						<th scope="row" th:text="${q.id}"></th>
+						<td th:text="${q.addquery}"></td>
+						<td th:text="${q.createdAt}"></td>
+						<td th:if="${q.status=='sent'}" th:text="'Sent'" class="text-primary status"></td>
+						<td th:if="${q.status=='read'}" th:text="'Readed'" class="text-success status"></td>
+						<td th:if="${q.status=='dump'}" th:text="'Dumped'" class="text-warning status"></td>
+						
+						<!-- <td th:if="${q.status=='sent'}" th:text="'Your Query is Sent'"></td>
+						<td th:if="${q.status=='read'}" th:text="'Your Query is Readed'"></td>
+						<td th:if="${q.status=='dump'}" th:text="'Your Query is Dumped'"></td> -->
+					</tr>
+
+				</tbody>
+			</table>
+	</div>
+			
+
+	</section>
+
+</body>
+</html>

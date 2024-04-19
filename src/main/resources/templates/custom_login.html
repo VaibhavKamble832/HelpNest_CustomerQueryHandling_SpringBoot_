@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		
+	<style>
+		
+		.hero {
+			background-color: #11235A;
+			padding: 100px 0;
+			border-radius: 0 0 10rem 10rem;
+		}
+
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px 30px 30px;
+            margin: -150px auto 50px auto;
+            width: 100%;
+            max-width: 600px;
+        }
+		.form-container:hover{
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+        
+        .form-title {
+            color: #11235A;
+            font-weight:bold;
+            text-align: center;
+			font-size: 45px;
+			margin-bottom: -10px;
+        }
+
+        .form-button {
+            background-color: #11235A;
+            font-size:25px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background-color: #0a1f44;
+        }
+
+        label {
+            color: #11235A;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+
+	<div class="hero">
+	
+	</div>
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">Login</h2>
+            
+            <th:block th:if="${param.error}">
+				<p class="alert alert-danger fs-5 d-flex align-items-center justify-content-center mt-3" style="height: 3rem;">Invalid Email_ID or Password</p>
+			</th:block>
+
+			<th:block th:if="${param.logout}">
+				<p class="alert alert-success fs-5 d-flex align-items-center justify-content-center mt-3" style="height: 3rem;">Logout Successfully</p>
+			</th:block>
+			
+            <hr>
+            <form th:action="@{/userlogin}" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="form-button btn-block">Login</button>
+            </form>
+            
+            <div class="mt-2" style="margin-left: 10rem">
+				<p>
+		   			Don't have an account? <a href="/customerRegister" style="font-size: 20px;">Register</a>
+				</p>
+			</div>
+            
+        </div>
+    </div>
+	
+	
+	</section>
+
+</body>
+</html>

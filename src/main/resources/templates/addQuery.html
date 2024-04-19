@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="navbar::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+
+	<section>
+
+		<style>
+.hero {
+	background-color: #11235A;
+	padding: 100px 0;
+	border-radius: 0 0 10rem 10rem;
+}
+
+.form-container {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	padding: 20px 30px 30px 30px;
+	margin: -150px auto 50px auto;
+	width: 100%;
+	max-width: 600px;
+}
+
+.form-container:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.form-title {
+	color: #11235A;
+	font-weight: bold;
+	text-align: center;
+	font-size: 45px;
+	margin-bottom: -10px;
+}
+
+.form-button {
+	background-color: #11235A;
+	font-size: 25px;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.form-button:hover {
+	background-color: #0a1f44;
+}
+
+label {
+	color: #11235A;
+	font-weight: bold;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	outline: none;
+}
+</style>
+
+
+		<div class="hero"></div>
+
+		<th:block th:if="${session.msg}">
+			<p
+				class="text-center alert alert-success text-success position-absolute"
+				style="width: 25rem; top: 80px; right: 20px; font-size: 22px;"
+				th:text="${session.msg}"></p>
+			<th:block th:text="${@customerService.removeSessionMsg()}"></th:block>
+		</th:block>
+		<th:block th:if="${session.emsg}">
+			<p
+				class="text-center alert alert-danger text-danger position-absolute"
+				style="width: 25rem; top: 80px; right: 20px; font-size: 22px;"
+				th:text="${session.emsg}"></p>
+			<th:block th:text="${@customerService.removeSessionEMsg()}"></th:block>
+		</th:block>
+
+
+		<div class="container">
+			<div class="form-container">
+				<h2 class="form-title">Ask Your Query Here</h2>
+				<hr>
+				<form action="/customer/addQuery" th:object="${query}" method="post">
+
+					<div class="form-group">
+						<label for="query">Your Query:</label> <span
+							th:if="${#fields.hasErrors('addquery')}" th:errors="*{addquery}"
+							style="color: red; font-style: italic;"></span>
+						<textarea rows="2" cols="10" id="query" th:field="*{addquery}"></textarea>
+					</div>
+
+					<input type="hidden" name="customer" th:value="${mycustomer.id}"> 
+					<input type="hidden" name="status" value="sent">
+
+					<div class="mb-3">
+						<label for="exampleFormControlInput1" class="form-label"><span
+							style="font-weight: bold; font-size: 17px; color: #11235A">Employee:
+						</span></label>
+						<select
+							class="btn btn-light" th:field="*{employee}">
+							<option th:value="default">--select Employee--</option>
+							<option th:each="emp:${emplist}" th:value="${emp.id}"
+								th:text="${emp.department}"></option>
+						</select>
+					</div>
+
+					<button type="submit" class="form-button btn-block">Sent</button>
+
+				</form>
+			</div>
+		</div>
+
+		<!-- <div th:insert="index.html::footer" >
+	
+	</div> -->
+
+	</section>
+
+</body>
+</html>
