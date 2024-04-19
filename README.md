@@ -17,3 +17,6 @@
 <P>-<b>Frontend: </b> Thymeleaf for server-side rendering, complemented by HTML/CSS for styling</P>
 
 <h2>Usage:</h2>
+<P><b>Admin </b>can use default login credentials to access the system, oversee all user activities, and register Employees.</P>
+<P><b>Employees </b> can sign up, manage their profiles, and handle customer queries after logging in.</P>
+<P><b>Customers </b>can register and log in to submit queries, view their statuses, and update their profiles.</P>
